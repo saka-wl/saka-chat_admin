@@ -12,7 +12,13 @@ type FieldType = {
 
 const Login: FC = () => {
   const navigate = useNavigate();
-  const { setAdmin } = useModel('admin');
+  const { setInitialState } = useModel('@@initialState');
+
+  // useEffect(() => {
+  //   autoLoginApi().then(res => {
+  //     console.log(res);
+  //   })
+  // }, []);
 
   const onFinish: FormProps<FieldType>['onFinish'] = async (values) => {
     const { code, data, msg } = await loginApi(values);
@@ -21,7 +27,7 @@ const Login: FC = () => {
       return;
     }
     message.success('登陆成功');
-    setAdmin(getLoginInfoObj(data));
+    setInitialState(getLoginInfoObj(data));
     navigate('/home');
   };
 

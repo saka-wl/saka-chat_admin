@@ -1,9 +1,17 @@
 // 运行时配置
+import { history } from '@umijs/max';
+import { autoLoginApi, getLoginInfoObj, IAdmin } from './api/user';
 
 // 全局初始化数据配置，用于 Layout 用户信息和权限初始化
 // 更多信息见文档：https://umijs.org/docs/api/runtime-config#getinitialstate
-export async function getInitialState(): Promise<{ name: string }> {
-  return { name: '@umijs/max' };
+export async function getInitialState(): Promise<IAdmin | null> {
+  const resp = await autoLoginApi();
+  if (resp.code !== 200 || !resp.data) {
+    history.push('/login');
+  } else {
+    history.push('/home');
+  }
+  return getLoginInfoObj(resp.data);
 }
 
 export const layout = () => {

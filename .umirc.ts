@@ -18,16 +18,7 @@ export default defineConfig({
       name: '首页',
       path: '/home',
       component: './Home',
-    },
-    {
-      name: '权限演示',
-      path: '/access',
-      component: './Access',
-    },
-    {
-      name: ' CRUD 示例',
-      path: '/table',
-      component: './Table',
+      access: 'normal',
     },
     {
       name: '登陆',
@@ -40,6 +31,12 @@ export default defineConfig({
       path: '/enroll',
       component: './Enroll',
       layout: false,
+    },
+    {
+      name: '用户权限控制',
+      path: '/loginControl',
+      component: './LoginControl',
+      access: 'normal',
     },
   ],
   npmClient: 'pnpm',
